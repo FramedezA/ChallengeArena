@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+//    alias(libs.plugins.kotlin.kapt) version "1.8.0"
+    id ("kotlin-kapt")
 }
 
 android {
@@ -15,6 +17,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/gradle/incremental.annotation.processors"
+        }
     }
 
     buildTypes {
@@ -37,6 +45,11 @@ android {
 
 dependencies {
 
+    implementation(libs.dagger.android)
+    implementation(libs.dagger.android.support) // if you use the support libraries
+    implementation(libs.dagger.android.processor)
+    implementation(libs.dagger.compiler)
+    implementation(libs.dagger.compiler.v211)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -48,13 +61,16 @@ dependencies {
     implementation(project(":feature:network"))
     implementation(project(":feature:login"))
     implementation(project(":feature:splash"))
+    implementation(project(":feature:home"))
+    implementation(project(":feature:profile"))
+    implementation(project(":feature:challenges"))
+    implementation(project(":feature:achievements"))
+
+
 
     implementation(project(":core"))
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-//    implementation(libs.feature.login)
-//    implementation project(path: ':core')
-//     project(path: ':feature:splash')
+    implementation(kotlin("script-runtime"))
 }

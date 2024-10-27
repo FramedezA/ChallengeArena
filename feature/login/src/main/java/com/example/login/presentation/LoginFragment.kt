@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.login.R
 import com.example.login.databinding.FragmentLoginBinding
-import com.example.login.presentation.di.provider.LoginComponentProvider
 import javax.inject.Inject
 
 
@@ -20,7 +19,6 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
 
-    @Inject
     lateinit var loginViewModelFactory: LoginViewModelFactory
     private lateinit var viewModel: LoginViewModel
 
@@ -35,8 +33,7 @@ class LoginFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as LoginComponentProvider)
-            .getLoginComponent().inject(this)
+        loginViewModelFactory = LoginServiceLocator.getService("loginViewModelFactory")!!
         viewModel =
             ViewModelProvider(this, loginViewModelFactory)[LoginViewModel::class.java]
 
@@ -44,23 +41,12 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.loginCode.observe(viewLifecycleOwner) {
-            if (it.loginStatusCode != -5) {
-                when (it.loginStatusCode) {
-                    0 -> {
-                        findNavController().navigate(R.id.action_Login_to_Maps)
-                    }
-                    else ->{ Log.d("mLog12",it.loginStatusCode.toString())
-                        Toast.makeText(
+        viewModel.userIsLogged.observe(viewLifecycleOwner) {
+            if (it) {
 
-                            requireContext(),
-                            "Неверные логин или пароль",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                }
-                binding.loginButton.isClickable = true
+                findNavController().navigate(R.id.action_Login_to_Home)
             }
+
         }
 
 
@@ -69,10 +55,12 @@ class LoginFragment : Fragment() {
         }
         binding.loginButton.setOnClickListener {
             binding.loginButton.isClickable = false
-            viewModel.loginUser(
+            viewModel.login(
                 binding.loginEditText.text.toString(),
                 binding.passwordEditText.text.toString()
             )
+            binding.loginButton.isClickable = true
+
         }
     }
 }

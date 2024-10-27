@@ -10,13 +10,16 @@ interface AuthRepository {
         login: String,
         password: String,
         confirmPassword:String,
-        userIdMutableLiveData: MutableLiveData<Int>
+        userIdMutableLiveData: MutableLiveData<Int>,
+        userIsLoggedMutableLiveData: MutableLiveData<Boolean>
+
     )
 
-//    fun login(
-//        login: String,
-//        password: String,
-//    )
+    fun login(
+        login: String,
+        password: String,
+        userIsLoggedMutableLiveData: MutableLiveData<Boolean>
+    )
 //    fun getUser(
 //        id:Int
 //    )

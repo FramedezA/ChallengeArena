@@ -12,23 +12,21 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.auth.R
 import com.example.auth.databinding.FragmentAuthBinding
-import com.example.auth.presentation.di.provider.AuthComponentProvider
-import javax.inject.Inject
+
 
 
 class AuthFragment : Fragment() {
 
     private lateinit var binding: FragmentAuthBinding
 
-    @Inject
+
     lateinit var authViewModelFactory: AuthViewModelFactory
     private lateinit var viewModel: AuthViewModel
 
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as AuthComponentProvider)
-            .getAuthComponent().inject(this)
+        authViewModelFactory = AuthServiceLocator.getService("AuthViewModelFactory")!!
         viewModel =
             ViewModelProvider(this, authViewModelFactory)[AuthViewModel::class.java]
     }
@@ -46,24 +44,21 @@ class AuthFragment : Fragment() {
         binding.loginTextView.setOnClickListener {
             findNavController().navigate(R.id.action_Auth_to_Login)
         }
-        viewModel.userId.observe(viewLifecycleOwner) {
-            when (it) {
-                -1 -> makeToast("Этот логин уже используется")
-
-                -2 -> makeToast("Пользователь с таким именем уже существует")
-                else -> {
-                    findNavController().navigate(R.id.action_Auth_to_Maps)
-                }
+        viewModel.userIsLogged.observe(viewLifecycleOwner) {
+            if (it){
+                findNavController().navigate(R.id.action_Auth_to_Home)
             }
+//            when (it) {
+//                -1 -> makeToast("Этот логин уже используется")
+//
+//                -2 -> makeToast("Пользователь с таким именем уже существует")
+//                else -> {
+//                    findNavController().navigate(R.id.action_Auth_to_Maps)
+//                }
+//            }
 
         }
         binding.registerButton.setOnClickListener {
-//            checkingEnteredFields()
-//            viewModel.regNewUser2(
-//               "a","b","c"
-//            )
-//            viewModel.login("b","c")
-//             viewModel.getUser(13)
             checkingEnteredFields()
         }
     }
@@ -74,11 +69,12 @@ class AuthFragment : Fragment() {
         val nameLength = binding.regUserNameEditText.text.toString().length
 
         if (passwordLength in 8 until 40) {
-//            viewModel.regNewUser(
-//                    binding.nameEditText.text.toString(),
-//                    binding.regLoginEditText.text.toString(),
-//                    binding.regPasswordEditText.text.toString()
-//            )
+            viewModel.regNewUser(
+                binding.regUserNameEditText.text.toString(),
+                binding.regLoginEditText.text.toString(),
+                binding.regPasswordEditText.text.toString(),
+                binding.regConfirmPasswordEditText.text.toString()
+            )
         } else if (passwordLength >= 40) {
             makeToast("Слишком много символов в поле пароля")
 

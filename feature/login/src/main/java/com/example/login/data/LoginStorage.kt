@@ -8,4 +8,8 @@ interface LoginStorage {
     fun saveUserName(userName:String)
 
     fun saveId(id:String?)
+    fun saveAccessToken(token:String)
+    fun saveRefreshToken(token:String)
+
+    fun getId():String?
 }

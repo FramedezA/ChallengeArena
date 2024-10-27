@@ -1,6 +1,8 @@
 package com.example.auth.data.retrofit.Interface
 
+import com.example.auth.data.data_structures.AuthResponse
 import com.example.auth.data.data_structures.LoginRequest
+import com.example.auth.data.data_structures.LoginResponse
 import com.example.auth.data.data_structures.RegisterRequest
 import com.google.gson.annotations.SerializedName
 import retrofit2.Call
@@ -18,16 +20,16 @@ interface AuthRetrofitService {
     @POST("/api/v1/auth/register")
     fun regNewUser(
         @Body registerRequest: RegisterRequest
-    ): Call<Any>
+    ): Call<AuthResponse>
 
     @POST("/api/v1/auth/login")
     fun login(
         @Body loginRequest: LoginRequest
-    ):Call<Any>
-
-    @GET("/api/v1/users/{id}")
-    fun getUser(
-        @Path("id") id: Int,
-
-    ):Call<Any>
+    ):Call<LoginResponse>
+//
+//    @GET("/api/v1/users/{id}")
+//    fun getUser(
+//        @Path("id") id: Int,
+//
+//    ):Call<Any>
 }

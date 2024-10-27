@@ -1,35 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--suppress NavigationFile -->
+<?xml version="1.0" encoding="utf-8"?><!--suppress NavigationFile -->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
     app:startDestination="@id/Splash">
 
-<!--    <fragment-->
-<!--        android:id="@+id/Map"-->
-<!--        android:name="com.example.maps.presentation.MapsFragment"-->
-<!--        android:label="Map">-->
-<!--        <action-->
-<!--            android:id="@id/action_Maps_to_Profile"-->
-<!--            app:destination="@id/Profile" />-->
-<!--        <action-->
-<!--            android:id="@id/action_Maps_to_Entries"-->
-<!--            app:destination="@id/Entries"/>-->
-<!--        <action-->
-<!--            android:id="@id/action_Maps_to_Place"-->
-<!--            app:destination="@id/Place"/>-->
-<!--    </fragment>-->
+        <fragment
+            android:id="@+id/Challenges"
+            android:name="com.example.challenges.presentation.ChallengesFragment"
+            android:label="Challenges">
+        </fragment>
+
 
     <fragment
         android:id="@+id/Auth"
         android:name="com.example.auth.presentation.AuthFragment"
         android:label="Auth">
-<!--        <action-->
-<!--            android:id="@id/action_Auth_to_Maps"-->
-<!--            app:destination="@id/Map" />-->
+        <action
+            android:id="@id/action_Auth_to_Home"
+            app:destination="@id/Home" />
         <action
             android:id="@id/action_Auth_to_Login"
             app:destination="@id/Login" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/Achievments"
+        android:name="com.example.achievements.presentation.AchievmentFragment"
+        android:label="Achievments">
+        <action
+            android:id="@id/action_achiv_to_Home"
+            app:destination="@id/Home" />
+
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/Home"
+        android:name="com.example.home.presentation.HomeFragment"
+        android:label="Home">
+        <!--        &lt;!&ndash;        <action&ndash;&gt;-->
+        <!--        &lt;!&ndash;            android:id="@id/action_Auth_to_Maps"&ndash;&gt;-->
+        <!--        &lt;!&ndash;            app:destination="@id/Map" />&ndash;&gt;-->
+        <!--        <action-->
+        <!--            android:id="@id/action_Auth_to_Login"-->
+        <!--            app:destination="@id/Login" />-->
+        <action
+            android:id="@id/action_Home_to_achiv"
+            app:destination="@id/Achievments" />
 
     </fragment>
 
@@ -38,9 +56,9 @@
         android:id="@+id/Login"
         android:name="com.example.login.presentation.LoginFragment"
         android:label="Login">
-<!--        <action-->
-<!--            android:id="@id/action_Login_to_Maps"-->
-<!--            app:destination="@id/Map" />-->
+        <action
+            android:id="@id/action_Login_to_Home"
+            app:destination="@id/Home" />
         <action
             android:id="@id/action_Login_to_Auth"
             app:destination="@id/Auth" />
@@ -51,9 +69,9 @@
         android:id="@+id/Splash"
         android:name="com.example.splash.presentation.SplashFragment"
         android:label="Splash">
-<!--        <action-->
-<!--            android:id="@id/action_Splash_to_Maps"-->
-<!--            app:destination="@id/Map" />-->
+        <action
+            android:id="@id/action_Splash_to_Home"
+            app:destination="@id/Home" />
         <action
             android:id="@id/action_Splash_to_Login"
             app:destination="@id/Login" />
@@ -61,52 +79,62 @@
     </fragment>
 
 
+    <action
+        android:id="@+id/action_to_Profile"
+        app:destination="@id/Profile" />
 
+    <action
+        android:id="@+id/action_to_Home"
+        app:destination="@id/Home" />
 
-<!--    <dialog-->
-<!--        android:id="@+id/Profile"-->
-<!--        android:name="com.example.profile.presentation.ProfileBottomSheetDialogFragment"-->
-<!--        android:label="Profile">-->
-<!--        <action-->
-<!--            android:id="@id/action_Profile_to_Confirm"-->
-<!--            app:destination="@id/Confirm"/>-->
+    <action
+        android:id="@+id/action_to_Challenges"
+        app:destination="@id/Challenges" />
 
-<!--    </dialog>-->
+    <fragment
+        android:id="@+id/Profile"
+        android:name="com.example.profile.presentation.ProfileFragment"
+        android:label="Profile">
+        <!--        <action-->
+        <!--            android:id="@id/action_Profile_to_Confirm"-->
+        <!--            app:destination="@id/Confirm"/>-->
 
-<!--    <dialog-->
-<!--        android:id="@+id/Confirm"-->
-<!--        android:name="com.example.profile.presentation.ConfirmDialogFragment"-->
-<!--        android:label="Confirm">-->
-<!--        <action-->
-<!--            android:id="@id/action_Confirm_to_Login"-->
-<!--            app:destination="@id/Login"/>-->
-<!--    </dialog>-->
+    </fragment>
 
-<!--    <dialog-->
-<!--        android:id="@+id/Entries"-->
-<!--        android:name="com.example.entry.presentation.EntriesBottomSheetFragment"-->
-<!--        android:label="Entries">-->
-<!--        <action-->
-<!--            android:id="@id/action_Entries_to_DelConfirm"-->
-<!--            app:destination="@id/DelConfirm"/>-->
-<!--    </dialog>-->
+    <!--    <dialog-->
+    <!--        android:id="@+id/Confirm"-->
+    <!--        android:name="com.example.profile.presentation.ConfirmDialogFragment"-->
+    <!--        android:label="Confirm">-->
+    <!--        <action-->
+    <!--            android:id="@id/action_Confirm_to_Login"-->
+    <!--            app:destination="@id/Login"/>-->
+    <!--    </dialog>-->
 
-<!--    <dialog-->
-<!--        android:id="@+id/DelConfirm"-->
-<!--        android:name="com.example.entry.presentation.ConfirmDialogFragment"-->
-<!--        android:label="DelConfirm"/>-->
+    <!--    <dialog-->
+    <!--        android:id="@+id/Entries"-->
+    <!--        android:name="com.example.entry.presentation.EntriesBottomSheetFragment"-->
+    <!--        android:label="Entries">-->
+    <!--        <action-->
+    <!--            android:id="@id/action_Entries_to_DelConfirm"-->
+    <!--            app:destination="@id/DelConfirm"/>-->
+    <!--    </dialog>-->
 
-<!--    <dialog-->
-<!--        android:id="@+id/Place"-->
-<!--        android:name="com.example.place.presentation.ModalBottomSheetFragment"-->
-<!--        android:label="Place">-->
-<!--        <action-->
-<!--            android:id="@id/action_Place_to_PlaceOnline"-->
-<!--            app:destination="@id/PlaceOnline"/>-->
-<!--    </dialog>-->
+    <!--    <dialog-->
+    <!--        android:id="@+id/DelConfirm"-->
+    <!--        android:name="com.example.entry.presentation.ConfirmDialogFragment"-->
+    <!--        android:label="DelConfirm"/>-->
 
-<!--    <dialog-->
-<!--        android:id="@+id/PlaceOnline"-->
-<!--        android:name="com.example.place.presentation.place_online.PlaceOnlineDialog"-->
-<!--        android:label="Place"/>-->
+    <!--    <dialog-->
+    <!--        android:id="@+id/Place"-->
+    <!--        android:name="com.example.place.presentation.ModalBottomSheetFragment"-->
+    <!--        android:label="Place">-->
+    <!--        <action-->
+    <!--            android:id="@id/action_Place_to_PlaceOnline"-->
+    <!--            app:destination="@id/PlaceOnline"/>-->
+    <!--    </dialog>-->
+
+    <!--    <dialog-->
+    <!--        android:id="@+id/PlaceOnline"-->
+    <!--        android:name="com.example.place.presentation.place_online.PlaceOnlineDialog"-->
+    <!--        android:label="Place"/>-->
 </navigation>

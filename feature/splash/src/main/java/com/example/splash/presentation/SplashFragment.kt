@@ -9,13 +9,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.splash.R
-import com.example.splash.presentation.di.provider.SplashComponentProvider
-import javax.inject.Inject
+
 
 
 class SplashFragment : Fragment() {
 
-    @Inject
     lateinit var splashViewModelFactory: SplashViewModelFactory
     private lateinit var splashViewModel: SplashViewModel
 
@@ -28,8 +26,7 @@ class SplashFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as SplashComponentProvider)
-            .getSplashComponent().inject(this)
+        splashViewModelFactory = SplashServiceLocator.getService("splashViewModelFactory")!!
         splashViewModel = ViewModelProvider(
             this, splashViewModelFactory
         )[SplashViewModel::class.java]
@@ -38,7 +35,7 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (splashViewModel.isUserLogged()) {
-            findNavController().navigate(R.id.action_Splash_to_Maps)
+            findNavController().navigate(R.id.action_Splash_to_Home)
         } else {
             findNavController().navigate(R.id.action_Splash_to_Login)
         }

@@ -10,13 +10,18 @@ android {
     compileSdk 34
 
     defaultConfig {
-        minSdk 23
-
+        minSdk 24
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
         versionCode 1
         versionName '1.0'
         targetSdk 34
+    }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/gradle/incremental.annotation.processors"
+        }
     }
 
     buildTypes {
@@ -41,10 +46,10 @@ android {
 
 dependencies {
 
-    implementation 'com.google.dagger:dagger-android:2.43.2'
-    implementation 'com.google.dagger:dagger-android-support:2.43.2'
-    kapt 'com.google.dagger:dagger-android-processor:2.43.2'
-    kapt 'com.google.dagger:dagger-compiler:2.43.2'
+    implementation libs.dagger.android
+    implementation libs.dagger.android.support
+    implementation libs.dagger.android.processor
+    implementation libs.dagger.compiler
 
 
     implementation 'androidx.core:core-ktx:1.13.1'

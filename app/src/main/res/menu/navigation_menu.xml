@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item
+            android:id="@+id/home"
+            android:title="Дом"
+            android:icon="@drawable/home_04"/>
+
+
+        <item
+            android:id="@+id/profile"
+            android:title="профиль"
+            android:icon="@drawable/user_circle"/>
+
+    <item
+        android:id="@+id/challendes"
+        android:title="челленджи"
+        android:icon="@drawable/zoom_text"/>
+
+
+</menu>

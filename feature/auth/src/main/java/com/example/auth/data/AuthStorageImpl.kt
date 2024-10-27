@@ -8,7 +8,7 @@ class AuthStorageImpl(context: Context): AuthStorage {
 
     private val userPreferences: SharedPreferences = context.getSharedPreferences("USERS_TABLE",Context.MODE_PRIVATE)
 
-    override fun saveUserName(userName: String) {
+    override fun saveName(userName: String) {
         val editor = userPreferences.edit()
         editor?.putString("name",userName)
         editor?.apply()
@@ -23,4 +23,18 @@ class AuthStorageImpl(context: Context): AuthStorage {
         editor?.putString("id", id.toString())
         editor?.apply()
     }
+
+    override fun saveAccessToken(token: String) {
+        val editor = userPreferences.edit()
+        editor?.putString("accessToken",token)
+        editor?.apply()
+    }
+
+   override fun saveRefreshToken(token: String) {
+        val editor = userPreferences.edit()
+        editor?.putString("refreshToken",token)
+        editor?.apply()
+    }
+
+
 }

@@ -4,10 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import com.example.login.data.data_structures.UserInfo
 
 interface LoginRepository {
-    fun loginUser(
+    fun login(
         login: String,
         password: String,
-        loginCodeMutableLiveData: MutableLiveData<UserInfo>
+        userIsLoggedMutableLiveData: MutableLiveData<Boolean>
     )
 
 }

@@ -11,6 +11,8 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+//sdfsdf
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -26,3 +28,7 @@ include(":feature:auth")
 include(":feature:network")
 include(":feature:login")
 include(":feature:splash")
+include(":feature:home")
+include(":feature:profile")
+include(":feature:challenges")
+include(":feature:achievements")

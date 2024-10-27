@@ -12,17 +12,16 @@ class AuthViewModel(private val repository: AuthRepository):ViewModel() {
 
     private val userIdMutable: MutableLiveData<Int> = MutableLiveData()
     val userId: LiveData<Int> = userIdMutable
-    fun regNewUser(userName: String, login: String, password: String) {
-//        viewModelScope.launch {
-//            repository.regNewUser2(userName, login, password, userIdMutable)
-//        }
+
+    private val userIsLoggedMutable: MutableLiveData<Boolean> = MutableLiveData()
+    val userIsLogged: LiveData<Boolean> = userIsLoggedMutable
+    fun regNewUser(userName: String, login: String, password: String,confirmPassword:String) {
+        viewModelScope.launch {
+            repository.regNewUser(userName, login, password, confirmPassword , userIdMutable,userIsLoggedMutable)
+        }
     }
 //
-//    fun login( login: String, password: String) {
-//        viewModelScope.launch {
-//            repository.login( login, password)
-//        }
-//    }
+
 //    fun getUser(id:Int) {
 //        viewModelScope.launch {
 //            repository.getUser(id)

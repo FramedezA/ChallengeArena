@@ -12,9 +12,12 @@ import kotlinx.coroutines.launch
 class LoginViewModel(private val repository: LoginRepository):ViewModel() {
     private val loginCodeMutable: MutableLiveData<UserInfo> = MutableLiveData()
     val loginCode: LiveData<UserInfo> = loginCodeMutable
-    fun loginUser(login: String, password: String) {
+
+    private val userIsLoggedMutable: MutableLiveData<Boolean> = MutableLiveData()
+    val userIsLogged: LiveData<Boolean> = userIsLoggedMutable
+    fun login( login: String, password: String) {
         viewModelScope.launch {
-            repository.loginUser(login, password, loginCodeMutable)
+            repository.login( login, password,userIsLoggedMutable)
         }
     }
 }
